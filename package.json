@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
-	  "start": "nodemon src/index.ts"
+    "start": "nodemon src/index.ts"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,9 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "@types/pg": "^8.6.4",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "pg": "^8.7.3"
   }
 }
