@@ -1,5 +1,6 @@
 import db from "./database";
 import express from "express";
+import productsHandler from "./handlers/products";
 
 
 const app = express();
@@ -8,6 +9,4 @@ app.listen(port , ()=>{
     console.log("my server is alive!");
 });
 
-app.get("/",(req,res)=>{
-    res.json(db.connect());
-});
+productsHandler(app);
