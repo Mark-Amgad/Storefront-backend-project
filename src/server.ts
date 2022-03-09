@@ -3,6 +3,8 @@ import express from "express";
 import productsHandler from "./handlers/products";
 
 
+// the next is to start testing
+
 const app = express();
 const port = 3000;
 app.listen(port , ()=>{
