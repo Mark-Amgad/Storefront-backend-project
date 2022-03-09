@@ -7,7 +7,7 @@
     "build": "npx tsc",
     "jasmine": "jasmine",
     "start": "nodemon src/server.ts",
-    "test": "set ENV=test&& db-migrate --env test up && npm run build && npm run jasmine && db-migrate --env test down"
+    "test": "set ENV=test&& db-migrate --env test up && npm run build && npm run jasmine && db-migrate --env test down *"
   },
   "repository": {
     "type": "git",
