@@ -3,7 +3,8 @@ import express from "express";
 import productsHandler from "./handlers/products";
 
 
-// the next is to start testing
+// make test to all methods in product model
+// the next is to complete models and handlers
 
 const app = express();
 const port = 3000;

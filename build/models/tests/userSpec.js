@@ -36,14 +36,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var product_1 = require("../product");
-var produc_store = new product_1.ProductStore();
-describe("product test cases : ", function () {
-    it("product - index - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
+var user_1 = require("../user");
+describe("User model test cases :", function () {
+    var user_store = new user_1.UserStore();
+    it("user - index - test case : must return an empty array", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, produc_store.index()];
+                case 0: return [4 /*yield*/, user_store.index()];
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual([]);
@@ -51,28 +51,28 @@ describe("product test cases : ", function () {
             }
         });
     }); });
-    it("product - create - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var p, result;
+    it("user - show - test case : must return NaN", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    p = { name: "iphone", price: 400 };
-                    return [4 /*yield*/, produc_store.create(p)];
+                case 0: return [4 /*yield*/, user_store.show(5)];
                 case 1:
                     result = _a.sent();
-                    expect(result.name).toEqual("iphone");
+                    expect(result).toBeNaN;
                     return [2 /*return*/];
             }
         });
     }); });
-    it("product - show - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var result;
+    it("user - create - test case: user's first_name must be Mark", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var u, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, produc_store.show(2)];
+                case 0:
+                    u = { first_name: "Mark", last_name: "Amgad", password: "1234" };
+                    return [4 /*yield*/, user_store.create(u)];
                 case 1:
                     result = _a.sent();
-                    expect(result).toBeNaN;
+                    expect(result.first_name).toEqual("Mark");
                     return [2 /*return*/];
             }
         });
