@@ -1,9 +1,27 @@
+import db from "../../database";
 import { UserStore , User } from "../user";
 
 
 
 describe("User model test cases :",()=>{
     
+    beforeAll(async()=>{
+        const connection = await db.connect();
+        const query = "DELETE FROM users";
+        connection.query(query);
+        connection.release();
+
+    });
+
+    afterEach(async()=>{
+        const connection = await db.connect();
+        const query = "DELETE FROM users";
+        connection.query(query);
+        connection.release();
+
+    });
+
+
     const user_store = new UserStore();
 
     it("user - index - test case : must return an empty array",async()=>{
@@ -13,7 +31,7 @@ describe("User model test cases :",()=>{
 
     it("user - show - test case : must return NaN",async()=>{
         const result = await user_store.show(5);
-        expect(result).toBeNaN;
+        expect(result).toBeUndefined();
     });
 
     it("user - create - test case: user's first_name must be Mark",async()=>{

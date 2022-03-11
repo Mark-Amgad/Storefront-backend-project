@@ -1,11 +1,10 @@
 import db from "./database";
 import express from "express";
 import productsHandler from "./handlers/products";
-import userHandle from "./handlers/users";
-import userHandler from "./handlers/users";
+import usersHandler from "./handlers/users";
+import ordersHandler from "./handlers/orders";
 
-// user handler
-// the next is to complete order model,tests and handler
+// the next 
 // authentication middleware for jwt tokens
 
 
@@ -17,4 +16,5 @@ app.listen(port , ()=>{
 app.get("/",(req,res)=>{res.json("I am here don't worry")});
 
 productsHandler(app);
-userHandler(app);
+usersHandler(app);
+ordersHandler(app);

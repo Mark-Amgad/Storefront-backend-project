@@ -63,10 +63,10 @@ const showHandler = async(req:Request,res:Response):Promise<void>=>{
     }
 };
 
-const userHandler = (app:express.Application)=>{
-    app.get("/user/index",indexHandler);
-    app.get("/user/show/:id",showHandler);
-    app.post("/user/create/:first_name/:last_name/:password" , createHandler);
+const usersHandler = (app:express.Application)=>{
+    app.get("/users/index",indexHandler);
+    app.get("/users/show/:id",showHandler);
+    app.post("/users/create/:first_name/:last_name/:password" , createHandler);
 };
 
-export default userHandler;
+export default usersHandler;

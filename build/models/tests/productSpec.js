@@ -35,10 +35,42 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var database_1 = __importDefault(require("../../database"));
 var product_1 = require("../product");
 var produc_store = new product_1.ProductStore();
 describe("product test cases : ", function () {
+    beforeAll(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var connection, query;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, database_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    query = "DELETE FROM products";
+                    connection.query(query);
+                    connection.release();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    afterEach(function () { return __awaiter(void 0, void 0, void 0, function () {
+        var connection, query;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, database_1.default.connect()];
+                case 1:
+                    connection = _a.sent();
+                    query = "DELETE FROM products";
+                    connection.query(query);
+                    connection.release();
+                    return [2 /*return*/];
+            }
+        });
+    }); });
     it("product - index - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
@@ -72,7 +104,7 @@ describe("product test cases : ", function () {
                 case 0: return [4 /*yield*/, produc_store.show(2)];
                 case 1:
                     result = _a.sent();
-                    expect(result).toBeNaN;
+                    expect(result).toBeUndefined();
                     return [2 /*return*/];
             }
         });

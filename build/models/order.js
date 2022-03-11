@@ -39,12 +39,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserStore = void 0;
+exports.OrderStore = void 0;
 var database_1 = __importDefault(require("../database"));
-var UserStore = /** @class */ (function () {
-    function UserStore() {
+var OrderStore = /** @class */ (function () {
+    function OrderStore() {
     }
-    UserStore.prototype.index = function () {
+    OrderStore.prototype.index = function () {
         return __awaiter(this, void 0, void 0, function () {
             var connection, query, result, err_1;
             return __generator(this, function (_a) {
@@ -54,7 +54,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connection = _a.sent();
-                        query = "SELECT * FROM users";
+                        query = "SELECT * FROM orders";
                         return [4 /*yield*/, connection.query(query)];
                     case 2:
                         result = _a.sent();
@@ -62,14 +62,14 @@ var UserStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        console.log("user - index - error");
+                        console.log("model- order - index - error");
                         throw new Error("".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserStore.prototype.show = function (id) {
+    OrderStore.prototype.show = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var connection, query, result, err_2;
             return __generator(this, function (_a) {
@@ -79,7 +79,7 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connection = _a.sent();
-                        query = "SELECT * FROM users WHERE id =($1)";
+                        query = "SELECT * FROM orders WHERE id=($1)";
                         return [4 /*yield*/, connection.query(query, [id])];
                     case 2:
                         result = _a.sent();
@@ -87,14 +87,14 @@ var UserStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_2 = _a.sent();
-                        console.log("user - show - error");
+                        console.log("model - order - show - error");
                         throw new Error("".concat(err_2));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    UserStore.prototype.create = function (user) {
+    OrderStore.prototype.create = function (order) {
         return __awaiter(this, void 0, void 0, function () {
             var connection, query, result, err_3;
             return __generator(this, function (_a) {
@@ -104,21 +104,21 @@ var UserStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connection = _a.sent();
-                        query = "INSERT INTO users (first_name , last_name , password)VALUES($1,$2,$3) RETURNING *";
-                        return [4 /*yield*/, connection.query(query, [user.first_name, user.last_name, user.password])];
+                        query = "INSERT INTO orders (product_id,user_id,quantity,status) VALUES ($1,$2,$3,$4) RETURNING *";
+                        return [4 /*yield*/, connection.query(query, [order.product_id, order.user_id, order.quantity, order.status])];
                     case 2:
                         result = _a.sent();
                         connection.release();
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_3 = _a.sent();
-                        console.log("user - create - error");
+                        console.log("model - order - create - error");
                         throw new Error("".concat(err_3));
                     case 4: return [2 /*return*/];
                 }
             });
         });
     };
-    return UserStore;
+    return OrderStore;
 }());
-exports.UserStore = UserStore;
+exports.OrderStore = OrderStore;

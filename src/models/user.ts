@@ -17,6 +17,7 @@ export class UserStore
             const connection = await db.connect();
             const query = "SELECT * FROM users";
             const result = await connection.query(query);
+            connection.release();
             return result.rows;
         }
         catch(err)
@@ -33,6 +34,7 @@ export class UserStore
             const connection = await db.connect();
             const query = "SELECT * FROM users WHERE id =($1)";
             const result = await connection.query(query,[id]);
+            connection.release();
             return result.rows[0];
         }
         catch(err)
@@ -49,7 +51,10 @@ export class UserStore
             const connection = await db.connect();
             const query =
             "INSERT INTO users (first_name , last_name , password)VALUES($1,$2,$3) RETURNING *";
-            const result = await connection.query(query,[user.first_name,user.last_name,user.password]);
+            const result = await connection.query(query,
+                [user.first_name,user.last_name,user.password]
+                );
+            connection.release();
             return result.rows[0];
         }
         catch(err)

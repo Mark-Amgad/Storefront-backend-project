@@ -1,8 +1,26 @@
+import db from "../../database";
 import { Product,ProductStore } from "../product";
 
 const produc_store = new ProductStore();
 
 describe("product test cases : ",()=>{
+
+    beforeAll(async()=>{
+        const connection = await db.connect();
+        const query = "DELETE FROM products";
+        connection.query(query);
+        connection.release();
+
+    });
+    
+    afterEach(async()=>{
+        const connection = await db.connect();
+        const query = "DELETE FROM products";
+        connection.query(query);
+        connection.release();
+
+    });
+
     it("product - index - test case" , async()=>{
         const result  = await produc_store.index();
         expect(result).toEqual([]);
@@ -16,7 +34,7 @@ describe("product test cases : ",()=>{
 
     it("product - show - test case",async()=>{
         const result = await produc_store.show(2);
-        expect(result).toBeNaN;
+        expect(result).toBeUndefined();
 
     });
 });

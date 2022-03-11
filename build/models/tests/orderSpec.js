@@ -39,9 +39,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var database_1 = __importDefault(require("../../database"));
+var order_1 = require("../order");
 var user_1 = require("../user");
-describe("User model test cases :", function () {
+var product_1 = require("../product");
+var database_1 = __importDefault(require("../../database"));
+describe("order model test cases :", function () {
     beforeAll(function () { return __awaiter(void 0, void 0, void 0, function () {
         var connection, query;
         return __generator(this, function (_a) {
@@ -49,7 +51,7 @@ describe("User model test cases :", function () {
                 case 0: return [4 /*yield*/, database_1.default.connect()];
                 case 1:
                     connection = _a.sent();
-                    query = "DELETE FROM users";
+                    query = "DELETE FROM orders";
                     connection.query(query);
                     connection.release();
                     return [2 /*return*/];
@@ -63,19 +65,19 @@ describe("User model test cases :", function () {
                 case 0: return [4 /*yield*/, database_1.default.connect()];
                 case 1:
                     connection = _a.sent();
-                    query = "DELETE FROM users";
+                    query = "DELETE FROM orders";
                     connection.query(query);
                     connection.release();
                     return [2 /*return*/];
             }
         });
     }); });
-    var user_store = new user_1.UserStore();
-    it("user - index - test case : must return an empty array", function () { return __awaiter(void 0, void 0, void 0, function () {
+    var order_store = new order_1.OrderStore();
+    it("order-index test case: must return empty array", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_store.index()];
+                case 0: return [4 /*yield*/, order_store.index()];
                 case 1:
                     result = _a.sent();
                     expect(result).toEqual([]);
@@ -83,11 +85,11 @@ describe("User model test cases :", function () {
             }
         });
     }); });
-    it("user - show - test case : must return NaN", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("order-show test case: must return NaN", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, user_store.show(5)];
+                case 0: return [4 /*yield*/, order_store.show(2)];
                 case 1:
                     result = _a.sent();
                     expect(result).toBeUndefined();
@@ -95,16 +97,26 @@ describe("User model test cases :", function () {
             }
         });
     }); });
-    it("user - create - test case: user's first_name must be Mark", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var u, result;
+    it("order-create test case : quantity must be 4", function () { return __awaiter(void 0, void 0, void 0, function () {
+        var order, user, product, user_store, product_store, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    u = { first_name: "Mark", last_name: "Amgad", password: "1234" };
-                    return [4 /*yield*/, user_store.create(u)];
+                    order = { user_id: 1, product_id: 1, quantity: 4, status: 1 };
+                    user = { first_name: "any", last_name: "any", password: "any" };
+                    product = { name: "any", price: 50 };
+                    user_store = new user_1.UserStore();
+                    product_store = new product_1.ProductStore();
+                    return [4 /*yield*/, user_store.create(user)];
                 case 1:
+                    _a.sent();
+                    return [4 /*yield*/, product_store.create(product)];
+                case 2:
+                    _a.sent();
+                    return [4 /*yield*/, order_store.create(order)];
+                case 3:
                     result = _a.sent();
-                    expect(result.first_name).toEqual("Mark");
+                    expect(result.quantity).toEqual(4);
                     return [2 /*return*/];
             }
         });
