@@ -1,6 +1,7 @@
 import express,{ Request, Response } from "express";
 import { User , UserStore } from "../models/user";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -63,10 +64,36 @@ const showHandler = async(req:Request,res:Response):Promise<void>=>{
     }
 };
 
+const logInHandler = async(req:Request , res:Response)=>{
+    const id:number = parseInt(req.params.id);
+    let password:string = req.params.password;
+    const pepper:any = process.env.PASS_PEPPER;
+    password += pepper;
+    // now the user inputs is ready
+    const user_store = new UserStore();
+    const userRealData = await user_store.show(id);
+    const userRealPassword:string = userRealData["password"];
+    const validLogIn:boolean = bcrypt.compareSync(password,userRealPassword);
+    console.log(validLogIn);
+    if(validLogIn)
+    {
+        // create a token
+        // add this created token to the body
+        // create new handlermethod(authentication) to check on the token
+        // use the handler method as a middlware
+        res.send("Successfully logged");
+    }
+    else
+    {
+        res.send("Wrong password");
+    }
+};
+
 const usersHandler = (app:express.Application)=>{
     app.get("/users/index",indexHandler);
     app.get("/users/show/:id",showHandler);
     app.post("/users/create/:first_name/:last_name/:password" , createHandler);
+    app.get("/users/login/:id/:password",logInHandler);
 };
 
 export default usersHandler;
