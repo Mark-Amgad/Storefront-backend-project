@@ -1,8 +1,9 @@
 # Storefront-backend-project
 setup steps:
 1- install postgres
-1- install postgres
-2- install npm
+
+2- install postgres
+3- install npm
 
 database connections:
 1- create a database in your machine
