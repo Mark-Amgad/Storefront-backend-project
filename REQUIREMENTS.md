@@ -10,7 +10,7 @@ request body = {"id":id , "password":"yourpassword"}
 **note : the id is required to login so if you don't know your id you can get it manually from the database.**
 
 **Now you are logged in and can access all the endpoint because you have a JWT token.**
-## API Endpoins
+## API Endpoints
 
 ### products
 1- index : products/index (get request)
