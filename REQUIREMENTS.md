@@ -21,5 +21,15 @@ request body = {"id":id , "password":"yourpassword"}
 
 
 ### users
+**you must have a token or logged in to access these endpoints**
+1- index : users/index (get request)
+
+2- show : users/show/:id (get request)
+
+3- create : users/create (post request) body = {"first_name":"anyName" , "last_name":"any","password":"anyPass"}
+
+4- login : users/login (post request) body = {"id":id , "password":"yourpassword"}
+
+5- logout : users/logout (get request) (This endpoint will clear the JWT token)
 
 ### orders
