@@ -13,8 +13,11 @@ request body = {"id":id , "password":"yourpassword"}
 
 ### products
 1- index : products/index (get request)
+
 2- show : products/show/:id (get request)
+
 3- create : products/create (post) (body = {"name":"any","price":22})
+
 
 
 ### users
