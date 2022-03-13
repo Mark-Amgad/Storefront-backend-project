@@ -22,6 +22,7 @@ request body = {"id":id , "password":"yourpassword"}
 
 ### users
 **you must have a token or logged in to access these endpoints**
+
 1- index : users/index (get request)
 
 2- show : users/show/:id (get request)
