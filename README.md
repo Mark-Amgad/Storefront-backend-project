@@ -4,7 +4,7 @@ setup steps:
 2- install npm
 
 
-*Server will run on port :* 3000
+###Server will run on port : 3000
 
 
 database connections:
