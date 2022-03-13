@@ -1,10 +1,8 @@
 # Storefront-backend-project
 setup steps:
 1- install postgres
+2- install npm
 
-2- install postgres
-
-3- install npm
 
 
 database connections:
@@ -50,7 +48,7 @@ JWT_KEY = 123
 database.json file: // used for migrations
 
 {
-    
+
     "dev": {
       "driver": "pg",
       "host": "127.0.0.1",
