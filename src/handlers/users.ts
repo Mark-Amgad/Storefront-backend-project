@@ -23,10 +23,15 @@ const indexHandler = async(req:Request , res:Response):Promise<void>=>{
 
 };
 
-const createHandler = async (req:Request,res:Response):Promise<void> => {
+const createHandler = async (req:Request,res:Response)=> {
     try
     {
+        if(req.body.password == undefined || req.body.first_name == undefined)
+        {
+            return res.json("first name and password are required");
+        }
         const user_store = new UserStore();
+        console.log("create handler used");
         const u:User = {
             first_name:req.body.first_name,
             last_name:req.body.last_name,
@@ -101,6 +106,8 @@ const logInHandler = async(req:Request , res:Response)=>{
     
 };
 
+
+// this middleware will be used in other handlers and services
 export const authenticationMiddleWare = async(req:Request,res:Response,next:Function)=>
 {
     try
@@ -120,7 +127,7 @@ const logOutHandler = (req:Request , res:Response)=>{
     res.clearCookie("token").send("Logged out !");
 };
 
-const usersHandler = (app:express.Application)=>{
+const usersHandler = async(app:express.Application)=>{
     app.get("/users/mytoken",(req:Request,res:Response)=>{res.send(req.cookies.token)});
     app.get("/users/index",authenticationMiddleWare,indexHandler);
     app.get("/users/show/:id",showHandler);
