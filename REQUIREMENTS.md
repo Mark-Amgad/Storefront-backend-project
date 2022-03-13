@@ -49,7 +49,7 @@ request body = {"id":id , "password":"yourpassword"}
 url : service/getorders/:user_id (get request)
 
 ## Database Schema
-![database schema](https://drive.google.com/drive/my-drive)
+![database schema](db_schema.png)
 
 
 ### products
