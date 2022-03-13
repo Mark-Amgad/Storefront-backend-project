@@ -2,6 +2,7 @@ import {Order , OrderStore} from "../models/order";
 //import {Product , ProductStore} from "../models/product";
 //import {User , UserStore} from "../models/user";
 import express,{Request,Response} from "express";
+import { authenticationMiddleWare } from "./users";
 
 
 
@@ -10,7 +11,7 @@ const indexHandler = async(req:Request,res:Response)=>{
     {
         const order_store:OrderStore = new OrderStore();
         const result = await order_store.index();
-        res.json(result);
+        res.json(result).status(200);
     }
     catch(err)
     {
@@ -22,10 +23,10 @@ const createHandler = async(req:Request,res:Response)=>{
     try
     {
         const order_store = new OrderStore();
-        const user_id:number = parseInt(req.params.user_id);
-        const product_id:number = parseInt(req.params.product_id);
-        const quantity:number = parseInt(req.params.quantity);
-        const status:number = parseInt(req.params.status);
+        const user_id:number = parseInt(req.body.user_id);
+        const product_id:number = parseInt(req.body.product_id);
+        const quantity:number = parseInt(req.body.quantity);
+        const status:number = parseInt(req.body.status);
         const order:Order = {
             user_id:user_id,
             product_id:product_id,
@@ -34,7 +35,7 @@ const createHandler = async(req:Request,res:Response)=>{
         };
 
         const result = await order_store.create(order);
-        res.json(result);      
+        res.json(result).status(200);      
     }
     catch(err)
     {
@@ -47,7 +48,7 @@ const showHandler = async(req:Request,res:Response)=>{
     {
         const order_store = new OrderStore();
         const result = await order_store.show(parseInt(req.params.id));
-        res.json(result);
+        res.json(result).status(200);
     }
     catch(err)
     {
@@ -56,9 +57,11 @@ const showHandler = async(req:Request,res:Response)=>{
 };
 
 const ordersHandler = (app:express.Application)=>{
-    app.get("/orders/index" , indexHandler);
-    app.get("/orders/show/:id" , showHandler);
-    app.post("/orders/create/:user_id/:product_id/:quantity/:status" , createHandler);
+    app.get("/orders/index" ,authenticationMiddleWare, indexHandler);
+    app.get("/orders/show/:id" ,authenticationMiddleWare, showHandler);
+    app.post("/orders/create" ,
+    authenticationMiddleWare,
+     createHandler);
 };
 
 export default ordersHandler;

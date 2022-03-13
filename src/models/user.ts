@@ -22,7 +22,7 @@ export class UserStore
         }
         catch(err)
         {
-            console.log("user - index - error");
+            //console.log("user - index - error");
             throw new Error(`${err}`);
         }
     }
@@ -39,7 +39,7 @@ export class UserStore
         }
         catch(err)
         {
-            console.log("user - show - error");
+            //console.log("user - show - error");
             throw new Error(`${err}`);
         }
     }
@@ -59,7 +59,7 @@ export class UserStore
         }
         catch(err)
         {
-            console.log("user - create - error");
+            //console.log("user - create - error");
             throw new Error(`${err}`);
         }
     }

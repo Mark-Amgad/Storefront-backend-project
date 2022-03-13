@@ -31,7 +31,7 @@ describe("order model test cases :",()=>{
         expect(result).toEqual([]);
     });
 
-    it("order-show test case: must return NaN",async()=>{
+    it("order-show test case: must be undefined",async()=>{
         const result = await order_store.show(2);
         expect(result).toBeUndefined();
     });

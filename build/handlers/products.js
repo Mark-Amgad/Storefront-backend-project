@@ -37,12 +37,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var product_1 = require("../models/product");
+var users_1 = require("./users");
 // this function will be exported
 var productsHandler = function (app) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         app.get("/products/index", indexHandler);
         app.get("/products/show/:id", showHandler);
-        app.post("/products/create/:name/:price", createHandler);
+        app.post("/products/create", users_1.authenticationMiddleWare, createHandler);
         return [2 /*return*/];
     });
 }); };
@@ -56,7 +57,7 @@ var indexHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [4 /*yield*/, product_store.index()];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -76,7 +77,7 @@ var showHandler = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, product_store.show(parseInt(req.params.id))];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -93,14 +94,14 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 product = {
-                    name: req.params.name,
-                    price: parseInt(req.params.price)
+                    name: req.body.name,
+                    price: parseInt(req.body.price)
                 };
                 product_store = new product_1.ProductStore();
                 return [4 /*yield*/, product_store.create(product)];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();

@@ -85,7 +85,7 @@ describe("order model test cases :", function () {
             }
         });
     }); });
-    it("order-show test case: must return NaN", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("order-show test case: must be undefined", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {

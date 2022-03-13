@@ -62,7 +62,7 @@ var OrderStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows];
                     case 3:
                         err_1 = _a.sent();
-                        console.log("model- order - index - error");
+                        //console.log("model- order - index - error");
                         throw new Error("".concat(err_1));
                     case 4: return [2 /*return*/];
                 }
@@ -87,7 +87,7 @@ var OrderStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_2 = _a.sent();
-                        console.log("model - order - show - error");
+                        //console.log("model - order - show - error");
                         throw new Error("".concat(err_2));
                     case 4: return [2 /*return*/];
                 }
@@ -112,7 +112,7 @@ var OrderStore = /** @class */ (function () {
                         return [2 /*return*/, result.rows[0]];
                     case 3:
                         err_3 = _a.sent();
-                        console.log("model - order - create - error");
+                        //console.log("model - order - create - error");
                         throw new Error("".concat(err_3));
                     case 4: return [2 /*return*/];
                 }

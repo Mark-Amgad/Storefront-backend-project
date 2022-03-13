@@ -28,9 +28,9 @@ const createHandler = async (req:Request,res:Response):Promise<void> => {
     {
         const user_store = new UserStore();
         const u:User = {
-            first_name:req.params.first_name,
-            last_name:req.params.last_name,
-            password:req.params.password
+            first_name:req.body.first_name,
+            last_name:req.body.last_name,
+            password:req.body.password
         };
         // until this point the password is not hashed yet
         const salt:(string | any) = process.env.PASS_SALT;
@@ -40,12 +40,12 @@ const createHandler = async (req:Request,res:Response):Promise<void> => {
         u.password = hashed_password;
         // now the password is hashed
         const result = await user_store.create(u);
-        res.json(result);
+        res.json(result).status(200);
     }
     catch(err)
     {
-        console.log("handlers - users - error");
-        res.json(err);
+        console.log("handlers - users-create - error");
+        console.log(err);
     }
 };
 
@@ -55,7 +55,7 @@ const showHandler = async(req:Request,res:Response):Promise<void>=>{
         const user_store:UserStore = new UserStore();
         const id:number = parseInt(req.params.id);
         const result = await user_store.show(id);
-        res.json(result);
+        res.json(result).status(200);
     }
     catch(err)
     {
@@ -65,35 +65,68 @@ const showHandler = async(req:Request,res:Response):Promise<void>=>{
 };
 
 const logInHandler = async(req:Request , res:Response)=>{
-    const id:number = parseInt(req.params.id);
-    let password:string = req.params.password;
-    const pepper:any = process.env.PASS_PEPPER;
-    password += pepper;
-    // now the user inputs is ready
-    const user_store = new UserStore();
-    const userRealData = await user_store.show(id);
-    const userRealPassword:string = userRealData["password"];
-    const validLogIn:boolean = bcrypt.compareSync(password,userRealPassword);
-    console.log(validLogIn);
-    if(validLogIn)
+    try
     {
-        // create a token
-        // add this created token to the body
-        // create new handlermethod(authentication) to check on the token
-        // use the handler method as a middlware
-        res.send("Successfully logged");
+        const id:number = parseInt(req.body.id);
+        let password:string = req.body.password;
+        const pepper:any = process.env.PASS_PEPPER;
+        password += pepper;
+        // now the user inputs is ready
+        const user_store = new UserStore();
+        const userRealData = await user_store.show(id);
+        const userRealPassword:string = userRealData["password"];
+        const validLogIn:boolean = bcrypt.compareSync(password,userRealPassword);
+        if(validLogIn) // valid login with the correct password
+        {
+            
+            const key:any = process.env.JWT_KEY;
+            const token = jwt.sign({
+                user_id: userRealData.id,
+                user_first_name : userRealData.first_name,
+                user_last_name: userRealData.last_name
+            },key);
+            // how to save token in user data
+            return res.cookie("token" , token).send("logged in").status(200);
+        }
+        else
+        {
+            res.send("Wrong password").status(200);
+        }
     }
-    else
+    catch(err)
     {
-        res.send("Wrong password");
+        res.json(err);
     }
+    //console.log(validLogIn);
+    
+};
+
+export const authenticationMiddleWare = async(req:Request,res:Response,next:Function)=>
+{
+    try
+    {
+        const token = req.cookies.token;
+        const key:any = process.env.JWT_KEY;
+        const verify = jwt.verify(token,key);
+        next();
+    }
+    catch(err)
+    {
+        res.send("You don't have the authority to come here");
+    }
+}
+
+const logOutHandler = (req:Request , res:Response)=>{
+    res.clearCookie("token").send("Logged out !");
 };
 
 const usersHandler = (app:express.Application)=>{
-    app.get("/users/index",indexHandler);
+    app.get("/users/mytoken",(req:Request,res:Response)=>{res.send(req.cookies.token)});
+    app.get("/users/index",authenticationMiddleWare,indexHandler);
     app.get("/users/show/:id",showHandler);
-    app.post("/users/create/:first_name/:last_name/:password" , createHandler);
-    app.get("/users/login/:id/:password",logInHandler);
+    app.post("/users/create" , createHandler);
+    app.post("/users/login",logInHandler);
+    app.get("/users/logout",logOutHandler);
 };
 
 export default usersHandler;

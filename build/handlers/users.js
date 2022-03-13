@@ -39,8 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authenticationMiddleWare = void 0;
 var user_1 = require("../models/user");
 var bcrypt_1 = __importDefault(require("bcrypt"));
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 var indexHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -72,9 +74,9 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
                 _a.trys.push([0, 2, , 3]);
                 user_store = new user_1.UserStore();
                 u = {
-                    first_name: req.params.first_name,
-                    last_name: req.params.last_name,
-                    password: req.params.password
+                    first_name: req.body.first_name,
+                    last_name: req.body.last_name,
+                    password: req.body.password
                 };
                 salt = process.env.PASS_SALT;
                 saltRound = parseInt(salt);
@@ -84,12 +86,12 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
                 return [4 /*yield*/, user_store.create(u)];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
-                console.log("handlers - users - error");
-                res.json(err_2);
+                console.log("handlers - users-create - error");
+                console.log(err_2);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -106,7 +108,7 @@ var showHandler = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, user_store.show(id)];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();
@@ -117,9 +119,70 @@ var showHandler = function (req, res) { return __awaiter(void 0, void 0, void 0,
         }
     });
 }); };
+var logInHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, password, pepper, user_store, userRealData, userRealPassword, validLogIn, key, token, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                id = parseInt(req.body.id);
+                password = req.body.password;
+                pepper = process.env.PASS_PEPPER;
+                password += pepper;
+                user_store = new user_1.UserStore();
+                return [4 /*yield*/, user_store.show(id)];
+            case 1:
+                userRealData = _a.sent();
+                userRealPassword = userRealData["password"];
+                validLogIn = bcrypt_1.default.compareSync(password, userRealPassword);
+                if (validLogIn) // valid login with the correct password
+                 {
+                    key = process.env.JWT_KEY;
+                    token = jsonwebtoken_1.default.sign({
+                        user_id: userRealData.id,
+                        user_first_name: userRealData.first_name,
+                        user_last_name: userRealData.last_name
+                    }, key);
+                    // how to save token in user data
+                    return [2 /*return*/, res.cookie("token", token).send("logged in").status(200)];
+                }
+                else {
+                    res.send("Wrong password").status(200);
+                }
+                return [3 /*break*/, 3];
+            case 2:
+                err_4 = _a.sent();
+                res.json(err_4);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+var authenticationMiddleWare = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, key, verify;
+    return __generator(this, function (_a) {
+        try {
+            token = req.cookies.token;
+            key = process.env.JWT_KEY;
+            verify = jsonwebtoken_1.default.verify(token, key);
+            next();
+        }
+        catch (err) {
+            res.send("You don't have the authority to come here");
+        }
+        return [2 /*return*/];
+    });
+}); };
+exports.authenticationMiddleWare = authenticationMiddleWare;
+var logOutHandler = function (req, res) {
+    res.clearCookie("token").send("Logged out !");
+};
 var usersHandler = function (app) {
-    app.get("/users/index", indexHandler);
+    app.get("/users/mytoken", function (req, res) { res.send(req.cookies.token); });
+    app.get("/users/index", exports.authenticationMiddleWare, indexHandler);
     app.get("/users/show/:id", showHandler);
-    app.post("/users/create/:first_name/:last_name/:password", createHandler);
+    app.post("/users/create", createHandler);
+    app.post("/users/login", logInHandler);
+    app.get("/users/logout", logOutHandler);
 };
 exports.default = usersHandler;

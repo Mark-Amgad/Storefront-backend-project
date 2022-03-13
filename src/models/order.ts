@@ -22,7 +22,7 @@ export class OrderStore
         }
         catch(err)
         {
-            console.log("model- order - index - error");
+            //console.log("model- order - index - error");
             throw new Error(`${err}`);
         }
     }
@@ -39,7 +39,7 @@ export class OrderStore
         }
         catch(err)
         {
-            console.log("model - order - show - error");
+            //console.log("model - order - show - error");
             throw new Error(`${err}`);
         }
     }
@@ -59,7 +59,7 @@ export class OrderStore
         }
         catch(err)
         {
-            console.log("model - order - create - error");
+            //console.log("model - order - create - error");
             throw new Error(`${err}`);
         }
     }

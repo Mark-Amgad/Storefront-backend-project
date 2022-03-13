@@ -37,6 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var order_1 = require("../models/order");
+var users_1 = require("./users");
 var indexHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var order_store, result, err_1;
     return __generator(this, function (_a) {
@@ -47,7 +48,7 @@ var indexHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                 return [4 /*yield*/, order_store.index()];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
@@ -64,10 +65,10 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 order_store = new order_1.OrderStore();
-                user_id = parseInt(req.params.user_id);
-                product_id = parseInt(req.params.product_id);
-                quantity = parseInt(req.params.quantity);
-                status = parseInt(req.params.status);
+                user_id = parseInt(req.body.user_id);
+                product_id = parseInt(req.body.product_id);
+                quantity = parseInt(req.body.quantity);
+                status = parseInt(req.body.status);
                 order = {
                     user_id: user_id,
                     product_id: product_id,
@@ -77,7 +78,7 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
                 return [4 /*yield*/, order_store.create(order)];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -97,7 +98,7 @@ var showHandler = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, order_store.show(parseInt(req.params.id))];
             case 1:
                 result = _a.sent();
-                res.json(result);
+                res.json(result).status(200);
                 return [3 /*break*/, 3];
             case 2:
                 err_3 = _a.sent();
@@ -108,8 +109,8 @@ var showHandler = function (req, res) { return __awaiter(void 0, void 0, void 0,
     });
 }); };
 var ordersHandler = function (app) {
-    app.get("/orders/index", indexHandler);
-    app.get("/orders/show/:id", showHandler);
-    app.post("/orders/create/:user_id/:product_id/:quantity/:status", createHandler);
+    app.get("/orders/index", users_1.authenticationMiddleWare, indexHandler);
+    app.get("/orders/show/:id", users_1.authenticationMiddleWare, showHandler);
+    app.post("/orders/create", users_1.authenticationMiddleWare, createHandler);
 };
 exports.default = ordersHandler;

@@ -20,7 +20,7 @@ describe("User model test cases :",()=>{
         connection.release();
 
     });
-
+    
 
     const user_store = new UserStore();
 
@@ -29,7 +29,7 @@ describe("User model test cases :",()=>{
         expect(result).toEqual([]);
     });
 
-    it("user - show - test case : must return NaN",async()=>{
+    it("user - show - test case : must be undefined",async()=>{
         const result = await user_store.show(5);
         expect(result).toBeUndefined();
     });

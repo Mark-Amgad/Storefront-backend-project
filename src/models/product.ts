@@ -20,7 +20,7 @@ export class ProductStore
         }
         catch(err)
         {
-            console.log("model - product - index error");
+            //console.log("model - product - index error");
             throw new Error(`${err}`);
         }
     }
@@ -37,7 +37,7 @@ export class ProductStore
         }
         catch(err)
         {
-            console.log("model - product - show error");
+            //console.log("model - product - show error");
             throw new Error(`${err}`);
         }
     }
@@ -55,7 +55,7 @@ export class ProductStore
         }
         catch(err)
         {
-            console.log("model - product - create error");
+            //console.log("model - product - create error");
             throw new Error(`${err}`);
         }
     }

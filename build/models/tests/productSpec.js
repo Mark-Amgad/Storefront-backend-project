@@ -71,7 +71,7 @@ describe("product test cases : ", function () {
             }
         });
     }); });
-    it("product - index - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("product - index - test case:must equal to an empty array", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -83,7 +83,7 @@ describe("product test cases : ", function () {
             }
         });
     }); });
-    it("product - create - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("product - create - test case: product name must be 'iphone'", function () { return __awaiter(void 0, void 0, void 0, function () {
         var p, result;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -97,7 +97,7 @@ describe("product test cases : ", function () {
             }
         });
     }); });
-    it("product - show - test case", function () { return __awaiter(void 0, void 0, void 0, function () {
+    it("product - show - test case : the return value must be undefined", function () { return __awaiter(void 0, void 0, void 0, function () {
         var result;
         return __generator(this, function (_a) {
             switch (_a.label) {

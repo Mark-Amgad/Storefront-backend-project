@@ -21,18 +21,18 @@ describe("product test cases : ",()=>{
 
     });
 
-    it("product - index - test case" , async()=>{
+    it("product - index - test case:must equal to an empty array" , async()=>{
         const result  = await produc_store.index();
         expect(result).toEqual([]);
     });
 
-    it("product - create - test case",async()=>{
+    it("product - create - test case: product name must be 'iphone'",async()=>{
         const p:Product = {name:"iphone",price:400};
         const result = await produc_store.create(p);
         expect(result.name).toEqual("iphone");
     });
 
-    it("product - show - test case",async()=>{
+    it("product - show - test case : the return value must be undefined",async()=>{
         const result = await produc_store.show(2);
         expect(result).toBeUndefined();
 
