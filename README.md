@@ -1,6 +1,8 @@
 # Storefront-backend-project
 setup steps:
+
 1- install postgres
+
 2- install npm
 
 
@@ -16,6 +18,7 @@ setup steps:
 migrations.
 3- run migrate up, in order to add tables on your Postgres database.
 
+### to see how to use the endpoints go to the REQUIREMENTS.md file :)
 
 ### NOTES:
 
