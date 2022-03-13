@@ -16,7 +16,7 @@ request body = {"id":id , "password":"yourpassword"}
 
 2- show : products/show/:id (get request)
 
-3- create : products/create (post) (body = {"name":"any","price":22})
+3- create : products/create (post request) (body = {"name":"any","price":22}) [token required(log in)]
 
 
 
