@@ -1,6 +1,6 @@
 # Storefront-backend-project
-
 setup steps:
+1- install postgres
 1- install postgres
 2- install npm
 
@@ -43,4 +43,4 @@ database.json file: // used for migrations
       "user": "postgres",
       "password": "mark1999"
     }
-}
+
