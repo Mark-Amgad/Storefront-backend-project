@@ -16,6 +16,7 @@ setup steps:
 
 2- all the database tables used in this project will be created in your database using
 migrations.
+
 3- run migrate up, in order to add tables on your Postgres database.
 
 ### to see how to use the endpoints go to the REQUIREMENTS.md file :)
