@@ -72,7 +72,11 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
+                if (req.body.password == undefined || req.body.first_name == undefined) {
+                    return [2 /*return*/, res.json("first name and password are required")];
+                }
                 user_store = new user_1.UserStore();
+                console.log("create handler used");
                 u = {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
@@ -147,17 +151,18 @@ var logInHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
                     return [2 /*return*/, res.cookie("token", token).send("logged in").status(200)];
                 }
                 else {
-                    res.send("Wrong password").status(200);
+                    res.json("Wrong password").status(200);
                 }
                 return [3 /*break*/, 3];
             case 2:
                 err_4 = _a.sent();
-                res.json(err_4);
+                res.json("Invalid data!");
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
 }); };
+// this middleware will be used in other handlers and services
 var authenticationMiddleWare = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var token, key, verify;
     return __generator(this, function (_a) {
@@ -177,12 +182,15 @@ exports.authenticationMiddleWare = authenticationMiddleWare;
 var logOutHandler = function (req, res) {
     res.clearCookie("token").send("Logged out !");
 };
-var usersHandler = function (app) {
-    app.get("/users/mytoken", function (req, res) { res.send(req.cookies.token); });
-    app.get("/users/index", exports.authenticationMiddleWare, indexHandler);
-    app.get("/users/show/:id", showHandler);
-    app.post("/users/create", createHandler);
-    app.post("/users/login", logInHandler);
-    app.get("/users/logout", logOutHandler);
-};
+var usersHandler = function (app) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        app.get("/users/mytoken", function (req, res) { res.send(req.cookies.token); });
+        app.get("/users/index", exports.authenticationMiddleWare, indexHandler);
+        app.get("/users/show/:id", showHandler);
+        app.post("/users/create", createHandler);
+        app.post("/users/login", logInHandler);
+        app.get("/users/logout", logOutHandler);
+        return [2 /*return*/];
+    });
+}); };
 exports.default = usersHandler;

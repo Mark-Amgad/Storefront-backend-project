@@ -7,6 +7,7 @@ var express_1 = __importDefault(require("express"));
 var products_1 = __importDefault(require("./handlers/products"));
 var users_1 = __importDefault(require("./handlers/users"));
 var orders_1 = __importDefault(require("./handlers/orders"));
+var userOrders_1 = __importDefault(require("./services/userOrders"));
 var cookie_parser_1 = __importDefault(require("cookie-parser"));
 // authentication middleware for jwt tokens
 var app = (0, express_1.default)();
@@ -20,4 +21,5 @@ app.get("/", function (req, res) { res.json("I am here don't worry"); });
 (0, products_1.default)(app);
 (0, users_1.default)(app);
 (0, orders_1.default)(app);
+(0, userOrders_1.default)(app);
 exports.default = app;

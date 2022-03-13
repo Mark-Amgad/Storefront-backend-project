@@ -83,7 +83,6 @@ const logInHandler = async(req:Request , res:Response)=>{
         const validLogIn:boolean = bcrypt.compareSync(password,userRealPassword);
         if(validLogIn) // valid login with the correct password
         {
-            
             const key:any = process.env.JWT_KEY;
             const token = jwt.sign({
                 user_id: userRealData.id,
@@ -95,12 +94,12 @@ const logInHandler = async(req:Request , res:Response)=>{
         }
         else
         {
-            res.send("Wrong password").status(200);
+            res.json("Wrong password").status(200);
         }
     }
     catch(err)
     {
-        res.json(err);
+        res.json("Invalid data!");
     }
     //console.log(validLogIn);
     
