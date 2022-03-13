@@ -1,6 +1,6 @@
 # API Requirements
 ## Instruction to access all the endpoints:
-### 1- create an user accout (sign up):
+### 1- create a user accout (sign up):
 using : users/create (post request)
 request body = {"first_name":"anyName" , "last_name":"any","password":"anyPass"}
 ### 2- login with this user account
