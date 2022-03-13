@@ -4,10 +4,11 @@ setup steps:
 2- install npm
 
 
-###Server will run on port : 3000
+### Server will run on port : 
+3000
 
 
-database connections:
+### database connections:
 
 1- create a database in your machine
 
@@ -16,7 +17,7 @@ migrations.
 3- run migrate up, in order to add tables on your Postgres database.
 
 
-NOTES:
+### NOTES:
 
 In order to achieve security, all sensitive information will be stored in the .env file which is hidden,
 
