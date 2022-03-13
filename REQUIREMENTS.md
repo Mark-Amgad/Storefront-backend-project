@@ -34,3 +34,16 @@ request body = {"id":id , "password":"yourpassword"}
 5- logout : users/logout (get request) (This endpoint will clear the JWT token)
 
 ### orders
+**you must have a token or logged in to access these endpoints**
+
+1- index : orders/index (get request)
+
+2- show : orders/show/:id (get request)
+
+3- create : orders/create (post request) body = {"user_id":1,"product_id":1,"quantity":1,"status":0}
+
+### services
+1- to show orders for a specific user:
+
+url : service/getorders/:user_id (get request)
+
