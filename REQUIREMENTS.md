@@ -54,15 +54,19 @@ url : service/getorders/:user_id (get request)
 
 ### products
 
-id , name , price
+id(integer) , name(character varying(100)) , price(character varying(100))
 
 
 ### users
 
-id , first_name , last_name , password
+id(integer) , first_name(character varying(100)) , last_name(character varying(100)) , password(character varying(255))
 
 
 ### orders
 
-id , user_id , product_id , quantity , status
+id(integer), user_id(integer) , status(integer)
+
+### order_products
+
+id(integer) , order_id(integer), product_id(integer), quantity(integer)
 
