@@ -5,6 +5,7 @@ import usersHandler from "./handlers/users";
 import ordersHandler from "./handlers/orders";
 import userOrdersService from "./services/userOrders";
 import cookieParser from "cookie-parser";
+import addPrdouctService from "./services/addProduct";
 
 // authentication middleware for jwt tokens
 
@@ -22,5 +23,6 @@ productsHandler(app);
 usersHandler(app);
 ordersHandler(app);
 userOrdersService(app);
+addPrdouctService(app);
 
 export default app;

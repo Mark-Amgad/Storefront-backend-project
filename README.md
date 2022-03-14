@@ -5,6 +5,22 @@ setup steps:
 
 2- install npm
 
+3- database:
+
+host : "127.0.0.1"
+
+driver : "pg"
+
+4- In "database.json" file :
+
+change (database, user, password, host) valuess with the suitable values to your machine
+
+ex: if you want to run this project using database called "shop" then in change :
+
+"database":"store_front_database" to "database" : "shop"
+
+
+
 
 ### Server will run on port : 
 3000

@@ -31,7 +31,7 @@ const createHandler = async (req:Request,res:Response)=> {
             return res.json("first name and password are required");
         }
         const user_store = new UserStore();
-        console.log("create handler used");
+        //console.log("create handler used");
         const u:User = {
             first_name:req.body.first_name,
             last_name:req.body.last_name,

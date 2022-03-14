@@ -2,9 +2,7 @@ import db from "../database";
 
 export type Order = {
     id?:number,
-    product_id:number,
     user_id:number,
-    quantity:number,
     status:number
 };
 
@@ -50,9 +48,9 @@ export class OrderStore
         {
             const connection = await db.connect();
             const query = 
-            "INSERT INTO orders (product_id,user_id,quantity,status) VALUES ($1,$2,$3,$4) RETURNING *";
+            "INSERT INTO orders (user_id,status) VALUES ($1,$2) RETURNING *";
             const result = await connection.query(query,
-                [order.product_id,order.user_id,order.quantity,order.status]
+                [order.user_id,order.status]
             );
             connection.release();
             return result.rows[0];

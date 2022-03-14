@@ -24,13 +24,9 @@ const createHandler = async(req:Request,res:Response)=>{
     {
         const order_store = new OrderStore();
         const user_id:number = parseInt(req.body.user_id);
-        const product_id:number = parseInt(req.body.product_id);
-        const quantity:number = parseInt(req.body.quantity);
         const status:number = parseInt(req.body.status);
         const order:Order = {
             user_id:user_id,
-            product_id:product_id,
-            quantity:quantity,
             status:status
         };
 
