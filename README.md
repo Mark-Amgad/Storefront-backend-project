@@ -1,5 +1,5 @@
 # Storefront-backend-project
-setup steps:
+### setup steps:
 
 1- install postgres
 
@@ -36,6 +36,13 @@ ex: if you want to run this project using database called "shop" then change :
 migrations.
 
 3- run migrate up, in order to add tables on your Postgres database.
+
+4- check "database.json" file and change in its values to be suitable with your local machine values for example : 
+
+if you want to run this project using database called "shop" then change :
+
+"database":"store_front_database" to "database" : "shop"
+
 
 ### to see how to use the endpoints go to the REQUIREMENTS.md file :)
 
