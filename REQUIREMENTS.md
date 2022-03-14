@@ -48,6 +48,10 @@ request body = {"id":id , "password":"yourpassword"}
 
 url : service/getorders/:user_id (get request)
 
+2- to add product into an order
+
+url : service/add     (post request)(post data will be in body) , body = {order_id:1 , product_id:1,quantity:2}
+
 ## Database Schema
 ![database schema](db_schema.png)
 
