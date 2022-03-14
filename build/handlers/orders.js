@@ -59,20 +59,16 @@ var indexHandler = function (req, res) { return __awaiter(void 0, void 0, void 0
     });
 }); };
 var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var order_store, user_id, product_id, quantity, status, order, result, err_2;
+    var order_store, user_id, status, order, result, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 order_store = new order_1.OrderStore();
                 user_id = parseInt(req.body.user_id);
-                product_id = parseInt(req.body.product_id);
-                quantity = parseInt(req.body.quantity);
                 status = parseInt(req.body.status);
                 order = {
                     user_id: user_id,
-                    product_id: product_id,
-                    quantity: quantity,
                     status: status
                 };
                 return [4 /*yield*/, order_store.create(order)];

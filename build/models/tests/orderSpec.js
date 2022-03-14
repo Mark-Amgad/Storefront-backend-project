@@ -102,7 +102,7 @@ describe("order model test cases :", function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    order = { user_id: 1, product_id: 1, quantity: 4, status: 1 };
+                    order = { user_id: 1, status: 1 };
                     user = { first_name: "any", last_name: "any", password: "any" };
                     product = { name: "any", price: 50 };
                     user_store = new user_1.UserStore();
@@ -116,7 +116,7 @@ describe("order model test cases :", function () {
                     return [4 /*yield*/, order_store.create(order)];
                 case 3:
                     result = _a.sent();
-                    expect(result.quantity).toEqual(4);
+                    expect(result.user_id).toEqual(1);
                     return [2 /*return*/];
             }
         });

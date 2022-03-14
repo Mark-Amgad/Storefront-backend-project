@@ -7,6 +7,8 @@ setup steps:
 
 3- database:
 
+port: 3000
+
 host : "127.0.0.1"
 
 driver : "pg"
@@ -15,7 +17,7 @@ driver : "pg"
 
 change (database, user, password, host) valuess with the suitable values to your machine
 
-ex: if you want to run this project using database called "shop" then in change :
+ex: if you want to run this project using database called "shop" then change :
 
 "database":"store_front_database" to "database" : "shop"
 

@@ -37,7 +37,7 @@ describe("order model test cases :",()=>{
     });
 
     it("order-create test case : quantity must be 4",async ()=>{
-        const order:Order = {user_id:1 , product_id:1 , quantity : 4 , status : 1};
+        const order:Order = {user_id:1, status : 1};
         const user:User = {first_name:"any",last_name:"any",password:"any"};
         const product:Product = {name:"any",price:50};
         const user_store = new UserStore();
@@ -45,7 +45,7 @@ describe("order model test cases :",()=>{
         await user_store.create(user);
         await product_store.create(product);
         const result = await order_store.create(order);
-        expect(result.quantity).toEqual(4);
+        expect(result.user_id).toEqual(1);
     });
 
 });

@@ -104,8 +104,8 @@ var OrderStore = /** @class */ (function () {
                         return [4 /*yield*/, database_1.default.connect()];
                     case 1:
                         connection = _a.sent();
-                        query = "INSERT INTO orders (product_id,user_id,quantity,status) VALUES ($1,$2,$3,$4) RETURNING *";
-                        return [4 /*yield*/, connection.query(query, [order.product_id, order.user_id, order.quantity, order.status])];
+                        query = "INSERT INTO orders (user_id,status) VALUES ($1,$2) RETURNING *";
+                        return [4 /*yield*/, connection.query(query, [order.user_id, order.status])];
                     case 2:
                         result = _a.sent();
                         connection.release();

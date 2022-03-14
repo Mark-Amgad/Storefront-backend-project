@@ -76,7 +76,6 @@ var createHandler = function (req, res) { return __awaiter(void 0, void 0, void 
                     return [2 /*return*/, res.json("first name and password are required")];
                 }
                 user_store = new user_1.UserStore();
-                console.log("create handler used");
                 u = {
                     first_name: req.body.first_name,
                     last_name: req.body.last_name,
