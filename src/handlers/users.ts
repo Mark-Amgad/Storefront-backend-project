@@ -133,6 +133,9 @@ const usersHandler = async(app:express.Application)=>{
     app.post("/users/create" , createHandler);
     app.post("/users/login",logInHandler);
     app.get("/users/logout",logOutHandler);
+
+    // this one is a backdoor for admin to make a quick test
+    app.get("/admin/users/index",indexHandler);
 };
 
 export default usersHandler;

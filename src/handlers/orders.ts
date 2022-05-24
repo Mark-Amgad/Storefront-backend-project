@@ -58,6 +58,10 @@ const ordersHandler = (app:express.Application)=>{
     app.post("/orders/create" ,
     authenticationMiddleWare,
      createHandler);
+
+     // the next endpoint is a backdoor for admins
+     app.get("admin/orders/index" , indexHandler);
+
 };
 
 export default ordersHandler;

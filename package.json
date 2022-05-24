@@ -32,12 +32,14 @@
     "@types/bcrypt": "^5.0.0",
     "@types/body-parser": "^1.19.2",
     "@types/cookie-parser": "^1.4.2",
+    "@types/cors": "^2.8.12",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/pg": "^8.6.4",
     "@types/supertest": "^2.0.11",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.2",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^16.0.0",
@@ -47,6 +49,8 @@
     "jasmine-ts": "^0.4.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.3",
+    "sequelize": "^6.17.0",
+    "sequelize-typescript": "^2.1.3",
     "supertest": "^6.2.2"
   }
 }

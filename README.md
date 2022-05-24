@@ -3,25 +3,9 @@
 
 1- install postgres
 
-2- install npm
+2- install npm (run: npm install to install packages)
 
-3- database:
-
-port: 3000
-
-host : "127.0.0.1"
-
-driver : "pg"
-
-4- In "database.json" file :
-
-change (database, user, password, host) valuess with the suitable values to your machine
-
-ex: if you want to run this project using database called "shop" then change :
-
-"database":"store_front_database" to "database" : "shop"
-
-
+3- run : db-migrate up (to build the used tables on your local machine)
 
 
 ### Server will run on port : 
@@ -44,14 +28,13 @@ if you want to run this project using database called "shop" then change :
 "database":"store_front_database" to "database" : "shop"
 
 
-### to see how to use the endpoints go to the REQUIREMENTS.md file :)
 
 ### NOTES:
 
 In order to achieve security, all sensitive information will be stored in the .env file which is hidden,
 
 But because this project is just for practice I will display some of these info here:
-
+### you must change these values with your suitable values.
 .env file:
 
 POSTGRES_HOST = localhost
